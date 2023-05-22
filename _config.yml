@@ -2,7 +2,7 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: https://zhang0226.github.io/
+url: https://zreozhangs.github.io/
 date_format: "ordinal"
 title: Zhang's Blog
 subtitle: "公众号：闷骚的程序员"
@@ -10,28 +10,47 @@ description: "个人博客"
 keywords: 程序员
 timezone: Asia/Shanghai
 encoding: "utf-8"
-side_bar_repo_limit: 5
-repository: zhang0226/zhang0226.github.io
+# 页面左下角显示的年份
+since: 2015
+# 源码仓库，请替换成自己的
+repository: zreozhangs/zreozhangs.github.io
 # 对 css 和 js 资源的 cdn 加速配置
 cdn:
     jsdelivr:
-        enabled: true
-# 组件配置
+        enabled: false
+# 可选组件配置
 components:
     # 分享
+    # weibo,qq,wechat,douban,qzone,linkedin,facebook,twitter
     share:
         enabled: false
+        hide-platforms: qq,facebook
     # 不蒜子访问统计
     busuanzi:
-        enabled: true
+        enabled: false
         start_date: 2020-05-03
+    # My Popular Repositories
+    side_bar_repo:
+        enabled: true
+        limit: 5
+    # 文章字数统计
+    word_count:
+        enabled: true
+    # 页面右上角，以及「关于」页面的二维码
+    # 修改图片请替换 assets/images/qrcode.jpg
+    qrcode:
+        enabled: true
+        image_alt: 闷骚的程序员
+    # 维基索引页使用哪种视图，支持 列表（list）/分类（cate）
+    wiki:
+        view: cate
+    # 图片灯箱效果功能
+    fancybox:
+        enabled: false
 # 压缩页面内容
 compress_html:
   clippings: all
   comments: ["<!--", "-->"]
-# 文章字数统计
-word_count:
-    enabled: true
 # 代码高亮风格，支持的 theme 列表见 https://github.com/mzlogin/rouge-themes
 highlight_theme: github
 
@@ -41,7 +60,7 @@ highlight_theme: github
 author: Zhang
 organization: 
 organization_url: 
-github_username: zhang0226
+github_username: zreozhangs
 location: Hunan, China
 email: zhangyao19970226@gmail.com
 
@@ -57,13 +76,19 @@ navs:
     href: /categories/
     label: 分类
 
-#   -
-#     href: /archives/
-#     label: 归档
+  -
+    href: /archives/
+    label: 归档
+    mobile-hidden: true
 
-#   -
-#     href: /open-source/
-#     label: 开源
+  -
+    href: /open-source/
+    label: 开源
+    mobile-hidden: true
+
+  -
+    href: /fragments/
+    label: 片段
 
   -
     href: /wiki/
@@ -72,6 +97,7 @@ navs:
   -
     href: /links/
     label: 链接
+    mobile-hidden: true
 
   -
     href: /about/
@@ -94,7 +120,7 @@ lsi: false
 quiet: false
 excerpt_separator: "\n\n"
 permalink: /:year/:month/:day/:title/
-gems:
+plugins:
     - jekyll-github-metadata
     - rouge
 #     - jekyll-html-pipeline
@@ -107,30 +133,45 @@ collections:
     wiki:
         output: true
         permalink: /wiki/:path/
+    fragments:
+        output: true
+        permalink: /fragment/:path/
 
 # ---------------- #
 #      Comments    #
 # ---------------- #
-# support provider: disqus, gitment, gitalk
-comments_provider: gitalk
+# support provider: disqus, gitment, gitalk, utterances, beaudar, giscus
+comments_provider: giscus
 # !!!重要!!! 请修改下面这些信息为你自己申请的
 # !!!Important!!! Please modify infos below to yours
-# https://disqus.com
+# disqus 配置参考：https://disqus.com
 disqus:
     username: 
-# https://imsun.net/posts/gitment-introduction/
+# gitment 配置参考：https://imsun.net/posts/gitment-introduction/
 gitment:
-    owner: zhang0226
+    owner: zreozhangs
     repo: blog-comments
     oauth:
         client_id: 5c948afb0c4f4c249561
         client_secret: 797508231bf0fcdf3469af026389ff6fe78d9cf4
 # https://github.com/gitalk/gitalk#install
 gitalk:
-    owner: zhang0226
+    owner: zreozhangs
     repo: blog-comments
     clientID: 5c948afb0c4f4c249561
     clientSecret: 797508231bf0fcdf3469af026389ff6fe78d9cf4
+# utterances 配置参考：https://utteranc.es/
+utterances:
+    repo: zreozhangs/zreozhangs.github.io
+# beaudar 配置参考：https://beaudar.lipk.org/
+beaudar:
+    repo: zreozhangs/zreozhangs.github.io
+# giscus 配置参考：https://giscus.app/zh-CN
+giscus:
+    repo: zreozhangs/zreozhangs.github.io
+    repo-id: MDEwOlJlcG9zaXRvcnk5MzEyNzkxNw==
+    category: Announcements
+    category-id: DIC_kwDOBY0E7c4CRtg9
 # 在使用其它评论组件时可点击显示 Disqus
 lazy_load_disqus : false
 
@@ -144,12 +185,13 @@ simple_jekyll_search:
     limit: 10
 
 # ---------------- #
-#    Analytics     #
+#      Google      #
 # ---------------- #
 google:
-    analytics_id: UA-80669434-1
+    analytics_id: G-20FLEG5Q2W
     adsense:
         footer: true
         sidebar: true 
-        content_header: true
+        sidebar-detail: true 
+        content_header: false
         content_footer: false
